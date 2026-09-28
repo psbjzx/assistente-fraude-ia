@@ -1,0 +1,223 @@
+[
+  {
+    "id": "CASE-01",
+    "title": "Base de transações e proporção de fraudes",
+    "questions": [
+      "Quantas transações e fraudes existem na base?",
+      "Qual é a taxa de fraude no dataset?",
+      "De onde vieram os dados do cartão?",
+      "Quantos registros são legítimos?"
+    ],
+    "answer": "A base contém 284.807 transações, sendo 492 fraudes (0,1727%) e 284.315 operações normais. É o conjunto ULB/Worldline divulgado no Kaggle e disponibilizado por URL no tutorial do TensorFlow. Os registros são históricos e anonimizados.",
+    "next_step": "Veja como essa proporção afeta a acurácia e a escolha das métricas.",
+    "source": "data/fontes-do-case.md#dados",
+    "aliases": [
+      "Que fração das operações foi golpe?",
+      "Qual é o tamanho da amostra?"
+    ]
+  },
+  {
+    "id": "CASE-02",
+    "title": "Por que a acurácia engana",
+    "questions": [
+      "Por que a acurácia não basta em fraude?",
+      "Por que 99,8% de acerto pode ser ruim?",
+      "O que acontece se eu classificar todas as transações como normais?",
+      "A acurácia alta é enganosa?"
+    ],
+    "answer": "Uma regra que diz 'normal' para todas as transações obtém 99,8273% de acurácia neste conjunto, mas não encontra nenhuma das 492 fraudes: recall da classe fraude igual a 0%. Por isso, a avaliação deve acompanhar especialmente recall, precisão, F1 e falsos alertas.",
+    "next_step": "Pergunte como o recall e a precisão se relacionam com fraudes perdidas e falsos alertas.",
+    "source": "data/fontes-do-case.md#acurácia",
+    "aliases": [
+      "Um detector que só prevê normal funciona?",
+      "Como um acerto quase perfeito pode falhar?"
+    ]
+  },
+  {
+    "id": "CASE-03",
+    "title": "Recall da fraude e fraudes não encontradas",
+    "questions": [
+      "O que significa recall da classe fraude?",
+      "Quantas fraudes o XGBoost encontrou no teste?",
+      "Quantas fraudes passaram sem alerta?",
+      "Qual foi o recall do modelo selecionado?"
+    ],
+    "answer": "Recall é TP/(TP+FN): entre todas as fraudes reais, qual parcela recebeu alerta. No teste, o XGBoost selecionado encontrou 85 das 98 fraudes, com recall de 86,73%; as outras 13 foram falsos negativos e não receberam alerta.",
+    "next_step": "Consulte também a precisão para entender quantos alertas gerados eram corretos.",
+    "source": "data/fontes-do-case.md#teste",
+    "aliases": [
+      "Quantos golpes escaparam do detector sem aviso?",
+      "Como interpretar 86,73% de recall?"
+    ]
+  },
+  {
+    "id": "CASE-04",
+    "title": "Precisão e falsos alertas",
+    "questions": [
+      "O que é precisão para a classe fraude?",
+      "Quantos falsos alertas o XGBoost emitiu?",
+      "Dos alertas de fraude, quantos estavam certos?",
+      "Qual a precisão do modelo no teste?"
+    ],
+    "answer": "Precisão é TP/(TP+FP): entre os alertas, quantos eram fraudes de fato. No teste, o XGBoost gerou 162 alertas: 85 fraudes verdadeiras e 77 falsos alertas. Sua precisão na classe fraude foi 52,47%.",
+    "next_step": "Compare com o recall: reduzir falsos alertas pode deixar mais fraudes sem detecção.",
+    "source": "data/fontes-do-case.md#teste",
+    "aliases": [
+      "Qual parte dos alarmes é falso positivo?",
+      "Entre os avisos de fraude, quantos eram verdadeiros?"
+    ]
+  },
+  {
+    "id": "CASE-05",
+    "title": "F1 e equilíbrio entre precisão e recall",
+    "questions": [
+      "O que é a métrica F1?",
+      "Qual o F1 do XGBoost no teste?",
+      "Como combinar precisão e recall?",
+      "F1 é média harmônica de quê?"
+    ],
+    "answer": "F1 é a média harmônica de precisão e recall, calculada por 2·precisão·recall/(precisão+recall). Ela resume as duas métricas sem substituir a análise de falsos negativos e falsos alertas. Para a classe fraude do XGBoost selecionado, o F1 no teste foi 65,38%.",
+    "next_step": "Para avaliar a operação, examine também os 13 falsos negativos e os 77 falsos positivos.",
+    "source": "data/fontes-do-case.md#teste",
+    "aliases": [
+      "Como calcular F1 score?",
+      "Qual indicador junta recall com precisão?"
+    ]
+  },
+  {
+    "id": "CASE-06",
+    "title": "Limiar de decisão e critério de escolha",
+    "questions": [
+      "Como foi escolhido o limiar 0,189879?",
+      "Por que o limiar é menor que 0,5?",
+      "Qual critério selecionou o modelo?",
+      "Vocês ajustaram o threshold usando o teste?"
+    ],
+    "answer": "Cada limiar foi escolhido exclusivamente na validação: maximizar o recall entre os pontos com precisão de pelo menos 50%. No XGBoost, o limiar escolhido foi 0,189879. O próprio modelo também foi selecionado pela validação; depois, o limiar permaneceu fixo no teste. O piso de 50% é didático e não foi definido por custos operacionais reais.",
+    "next_step": "Observe que alcançar a precisão mínima na validação não garante o mesmo resultado em novas amostras.",
+    "source": "data/fontes-do-case.md#limiar",
+    "aliases": [
+      "Qual corte de score aciona alerta?",
+      "Por que não usar o corte padrão de 0,5?"
+    ]
+  },
+  {
+    "id": "CASE-07",
+    "title": "Comparação dos três modelos principais",
+    "questions": [
+      "Quais modelos foram comparados?",
+      "Por que escolheram o XGBoost?",
+      "Como o Random Forest se saiu?",
+      "A regressão logística foi usada como baseline?"
+    ],
+    "answer": "Foram comparados regressão logística, Random Forest e XGBoost com pesos de classe, além de duas regressões logísticas com reamostragem. O XGBoost teve o maior recall elegível na validação (82,83% com 56,16% de precisão) e foi escolhido antes de observar o teste. No teste, XGBoost e Random Forest empataram em recall (86,73%), mas o Random Forest teve precisão maior (55,56% versus 52,47%). A escolha não foi refeita depois do teste.",
+    "next_step": "Consulte a regra de limiar para entender por que a seleção usa validação, e não o melhor número do teste.",
+    "source": "data/fontes-do-case.md#modelos",
+    "aliases": [
+      "Compare floresta aleatória com XGBoost no teste.",
+      "Quem foi escolhido entre regressão, floresta e boosting?"
+    ]
+  },
+  {
+    "id": "CASE-08",
+    "title": "Desbalanceamento, pesos e reamostragem",
+    "questions": [
+      "Como foi tratado o desbalanceamento?",
+      "O que são undersampling e oversampling neste projeto?",
+      "Foi usado scale_pos_weight no XGBoost?",
+      "A amostragem também foi aplicada no teste?"
+    ],
+    "answer": "O treino dos três modelos principais usou pesos de classe; no XGBoost, scale_pos_weight foi calculado pela razão entre normais e fraudes no treino (cerca de 578,26). Como alternativas, a logística usou undersampling de normais ou oversampling por duplicação de fraudes. Só o treino foi reamostrado; validação e teste conservaram a prevalência original. Duplicação não cria informação nova.",
+    "next_step": "Compare recall e precisão das alternativas antes de preferir uma técnica de balanceamento.",
+    "source": "data/fontes-do-case.md#treino",
+    "aliases": [
+      "Duplicar exemplos positivos é oversampling?",
+      "A amostra de teste foi balanceada também?"
+    ]
+  },
+  {
+    "id": "CASE-09",
+    "title": "Divisão dos dados, stratify e vazamento",
+    "questions": [
+      "Como foram separados treino, validação e teste?",
+      "Por que usar stratify?",
+      "Quando foi ajustado o StandardScaler?",
+      "Como vocês evitaram vazamento de dados?"
+    ],
+    "answer": "A divisão aleatória estratificada destinou 170.883 transações ao treino (295 fraudes), 56.962 à validação (99 fraudes) e 56.962 ao teste (98 fraudes). stratify preservou a proporção de fraudes. O StandardScaler ficou dentro de cada pipeline e foi ajustado apenas no treino correspondente. O teste não orientou treinamento, seleção de modelo nem escolha de limiar.",
+    "next_step": "Para simular uma implantação futura, seria útil repetir a avaliação com uma divisão temporal.",
+    "source": "data/fontes-do-case.md#preparação",
+    "aliases": [
+      "O escalonamento viu o teste?",
+      "Por que separar validação de treino?"
+    ]
+  },
+  {
+    "id": "CASE-10",
+    "title": "Colunas PCA e variáveis criadas",
+    "questions": [
+      "O que representam V1 até V28?",
+      "Quais são as colunas do dataset?",
+      "Para que servem LogAmount e TimeSin?",
+      "É possível saber o significado original de V14?"
+    ],
+    "answer": "A base traz Time, Amount, Class e V1–V28; as V são componentes transformadas por PCA e não revelam as variáveis originais. Na preparação foram criadas LogAmount = log1p(Amount) e TimeSin/TimeCos, uma codificação cíclica da posição temporal em 24 h desde o início da coleta. A fase não é necessariamente a hora civil local.",
+    "next_step": "Leia as explicações SHAP com cuidado: uma componente importante ainda não revela um comportamento financeiro específico.",
+    "source": "data/fontes-do-case.md#preparação",
+    "aliases": [
+      "Qual era o significado de V14 antes do PCA?",
+      "Foi aplicado logaritmo ao valor?"
+    ]
+  },
+  {
+    "id": "CASE-11",
+    "title": "SHAP e interpretação de uma transação",
+    "questions": [
+      "O que o SHAP revelou no XGBoost?",
+      "Por que uma transação foi marcada como fraude?",
+      "Quais variáveis aumentaram a pontuação da transação 77348?",
+      "SHAP prova que V14 causa fraude?"
+    ],
+    "answer": "Na transação de índice original 77348, que era fraude e recebeu alerta, as maiores contribuições SHAP positivas foram V14 (+3,493), V12 (+1,554) e V10 (+1,504); V8 reduziu a pontuação (−0,795). Os valores são na escala log-odds do XGBoost. SHAP explica a pontuação daquele modelo e não prova causalidade nem revela o significado original das componentes PCA.",
+    "next_step": "Compare essa explicação local com as métricas gerais antes de interpretar a qualidade do sistema.",
+    "source": "data/fontes-do-case.md#explicação",
+    "aliases": [
+      "Quais componentes apareceram na explicação local?",
+      "A variável V14 causou fraude?"
+    ]
+  },
+  {
+    "id": "CASE-12",
+    "title": "Curvas ROC, precisão e recall",
+    "questions": [
+      "O que mostram as curvas ROC e precisão-recall?",
+      "Qual foi a AP ou PR-AUC do XGBoost?",
+      "Qual a ROC-AUC do modelo selecionado?",
+      "Por que olhar a curva precisão-recall em fraude?"
+    ],
+    "answer": "A curva ROC compara a taxa de verdadeiros positivos à de falsos positivos ao variar o limiar. A curva precisão–recall mostra o compromisso entre fraudes detectadas e qualidade dos alertas, especialmente útil com raridade de fraudes. No teste do XGBoost selecionado, ROC-AUC foi 0,9774 e precisão média (AP, resumindo a curva PR) foi 0,8629. Essas áreas não substituem os números no limiar escolhido.",
+    "next_step": "Pergunte pelos 85 verdadeiros positivos, 77 falsos positivos e 13 falsos negativos no limiar escolhido.",
+    "source": "data/fontes-do-case.md#teste",
+    "aliases": [
+      "Qual foi a área sob a curva PR?",
+      "A ROC-AUC alta é suficiente?"
+    ]
+  },
+  {
+    "id": "CASE-13",
+    "title": "Limitações e uso em produção",
+    "questions": [
+      "O modelo está pronto para produção?",
+      "Quais são as limitações do projeto?",
+      "Por que testar separação temporal?",
+      "É possível criar histórico por cliente?"
+    ],
+    "answer": "Este é um estudo de portfólio, não um sistema para bloquear transações. Há somente 492 fraudes, a divisão é aleatória em dados históricos, não há identificador de cliente/cartão para criar histórico individual e o limite de precisão é didático. Antes de uso real, seriam necessários teste temporal, análise de custos, calibração e monitoramento.",
+    "next_step": "Defina custos de fraude e capacidade de revisão antes de ajustar uma política operacional de alertas.",
+    "source": "data/fontes-do-case.md#limites",
+    "aliases": [
+      "Podemos usar o modelo para bloquear pagamentos?",
+      "Como avaliar desempenho no futuro?"
+    ]
+  }
+]

@@ -1,0 +1,10 @@
+{
+  "unknown": "Não encontrei informação suficiente na base deste projeto para responder com segurança. Posso explicar as métricas, o limiar, os modelos ou os resultados do case de fraude.",
+  "ambiguous": "Encontrei mais de um assunto possível. Você pode especificar qual quer entender? Por exemplo: recall, precisão, limiar ou SHAP.",
+  "specific_transaction": "Não consigo classificar uma compra ou um cartão específico. Tenho apenas resultados agregados e uma transação de exemplo do case; não recebo os dados necessários para investigar operações reais.",
+  "instruction_override": "Uso apenas a base documentada deste projeto. Posso responder uma pergunta sobre o case de detecção de fraudes, com a fonte correspondente.",
+  "too_long": "Sua pergunta ficou longa para este protótipo. Resuma-a em até 500 caracteres e escolha um assunto do case por vez.",
+  "empty": "Escreva uma pergunta sobre métricas, modelos, dados, limiar ou SHAP do case de fraude.",
+  "source_label": "Fonte",
+  "next_step_label": "Próximo passo"
+}

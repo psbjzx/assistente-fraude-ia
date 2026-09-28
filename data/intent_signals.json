@@ -1,0 +1,172 @@
+{
+  "CASE-01": [
+    [
+      "\\b(base|dataset|amostra|registros|conjunto de dados)\\b",
+      0.3
+    ],
+    [
+      "\\b(fracao|proporcao|percentual|porcentagem|quantidade)\\b.{0,35}\\b(fraudes?|golpes?|casos fraudulentos)\\b",
+      0.38
+    ],
+    [
+      "\\b(kaggle|pesquisa)\\b.{0,45}\\b(linhas|transacoes|registros)\\b",
+      0.6
+    ]
+  ],
+  "CASE-02": [
+    [
+      "\\b(acuracia|accuracy|acertos?)\\b",
+      0.43
+    ],
+    [
+      "\\b(so|sempre)\\b.{0,35}\\b(normal|legitimo)\\b|\\b(normal|legitimo)\\b.{0,20}\\b(sempre|funcionaria)\\b",
+      0.5
+    ]
+  ],
+  "CASE-03": [
+    [
+      "\\b(recall|sensibilidade|falsos negativos)\\b",
+      0.39
+    ],
+    [
+      "\\b(fraudes?|golpes?)\\b.{0,35}\\b(escaparam|perdidas|despercebidas|sem alerta|sem aviso)\\b",
+      0.52
+    ],
+    [
+      "\\b(de todas|entre todas)\\b.{0,45}\\b(fraudulentas|fraudes|golpes)\\b.{0,50}\\b(identificou|encontrou|detectou)\\b",
+      0.68
+    ]
+  ],
+  "CASE-04": [
+    [
+      "\\b(precisao|falsos positivos|alarmes falsos)\\b",
+      0.39
+    ],
+    [
+      "\\b(alertas|alarmes|avisos)\\b.{0,38}\\b(corretos?|falsos?|verdadeiros?|confirma|golpe)\\b|\\b(qual parte|quanto|porcentagem)\\b.{0,30}\\b(alarmes|avisos)\\b",
+      0.53
+    ],
+    [
+      "\\b(taxa de acerto|porcentagem correta|chance)\\b.{0,45}\\b(alertas|avisos|notificacao)\\b",
+      0.68
+    ]
+  ],
+  "CASE-05": [
+    [
+      "\\b(f1|f1.score|media harmonica)\\b",
+      0.64
+    ],
+    [
+      "\\b(combinar|juntar|resume)\\b.{0,30}\\b(recall|precisao|sensibilidade)\\b",
+      0.28
+    ],
+    [
+      "\\b(juntar|combinar|junta)\\b.{0,50}\\b(precisao|recall)\\b",
+      0.65
+    ]
+  ],
+  "CASE-06": [
+    [
+      "\\b(limiar|threshold|nota de corte|corte|0,189879|0,5)\\b",
+      0.53
+    ],
+    [
+      "\\b(decidir|valor usado|ponto)\\b.{0,35}\\b(aviso|alerta)\\b",
+      0.55
+    ]
+  ],
+  "CASE-07": [
+    [
+      "\\b(floresta|random forest|xgboost|boosting|regressao logistica)\\b.{0,45}\\b(comparar|comparacao|ganhou|venceu|melhor|escolhido)\\b|\\b(comparar|ganhou|venceu|escolhido)\\b.{0,55}\\b(floresta|xgboost|boosting|regressao)\\b",
+      0.55
+    ],
+    [
+      "\\b(quem ganhou|quem venceu|modelo selecionado|algoritmo escolhido)\\b",
+      0.59
+    ],
+    [
+      "\\b(escolha|selecao)\\b.{0,30}\\b(algoritmo|modelo)\\b",
+      0.6
+    ]
+  ],
+  "CASE-08": [
+    [
+      "\\b(balanceamento|balancear|desbalanceamento|reamostragem|oversampling|undersampling|duplicar|pesos de classe|scale_pos_weight)\\b",
+      0.51
+    ],
+    [
+      "\\b(poucos|raros)\\b.{0,25}\\b(casos positivos|fraudes)\\b.{0,45}\\b(treinando|treino|treinar)\\b",
+      0.6
+    ],
+    [
+      "\\b(poucos|raros)\\b.{0,35}\\b(casos positivos|fraudes)\\b.{0,55}\\btrein\\w+\\b",
+      0.65
+    ],
+    [
+      "\\b(repetir|replicar|duplicar)\\b.{0,40}\\b(fraudes|fraudulentas|positivos)\\b",
+      0.63
+    ]
+  ],
+  "CASE-09": [
+    [
+      "\\b(padronizacao|escalonamento|scaler|standardscaler|stratify|vazamento|estratificacao)\\b",
+      0.61
+    ],
+    [
+      "\\b(separar|dividir|divisao)\\b.{0,25}\\b(treino|validacao|teste)\\b",
+      0.47
+    ],
+    [
+      "\\b(proporcao|distribuicao)\\b.{0,35}\\b(positivos|fraudes)\\b.{0,30}\\b(particoes|conjuntos)\\b",
+      0.64
+    ]
+  ],
+  "CASE-10": [
+    [
+      "\\b(pca|componentes anonimos|componentes originais|logamount|logaritmo|timesin|timecos)\\b",
+      0.6
+    ],
+    [
+      "\\b(v1|v14|v28)\\b.{0,40}\\b(significado|antes|original|comportamento)\\b",
+      0.53
+    ]
+  ],
+  "CASE-11": [
+    [
+      "\\b(shap|explicacao local|linha 77348|transacao 77348)\\b",
+      0.61
+    ],
+    [
+      "\\b(o que|qual|quais)\\b.{0,32}\\b(aumentou|contribuicoes)\\b.{0,32}\\b(pontuacao|risco)\\b",
+      0.44
+    ],
+    [
+      "\\b(waterfall|grafico shap|v8)\\b.{0,45}\\b(pontuacao|cima|baixo|empurrou)\\b",
+      0.65
+    ]
+  ],
+  "CASE-12": [
+    [
+      "\\b(roc|pr.auc|roc.auc|curva pr|curva de precisao|ap|grafico)\\b",
+      0.49
+    ],
+    [
+      "\\b(grafico|curva)\\b.{0,60}\\b(alertas|rara|fraude)\\b",
+      0.28
+    ],
+    [
+      "\\b(curva|grafico)\\b.{0,60}\\b(qualidade|alarmes|detec[cç]ao|alertas)\\b",
+      0.56
+    ]
+  ],
+  "CASE-13": [
+    [
+      "\\b(producao|uso real|implantacao|pronto|limitacoes|futuro|bloquear pagamentos)\\b",
+      0.49
+    ],
+    [
+      "\\b(banco|operacao real)\\b.{0,35}\\b(confiar|usar|implantar)\\b",
+      0.59
+    ]
+  ]
+}

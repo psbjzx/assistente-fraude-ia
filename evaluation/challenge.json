@@ -1,0 +1,22 @@
+[
+  {"id":"C01","question":"Essa pesquisa do Kaggle tinha quantas linhas no total?","status":"answered","article_id":"CASE-01"},
+  {"id":"C02","question":"Se a accuracy for altíssima, já posso confiar na detecção?","status":"answered","article_id":"CASE-02"},
+  {"id":"C03","question":"De todas as operações realmente fraudulentas, que percentual o sistema identificou?","status":"answered","article_id":"CASE-03"},
+  {"id":"C04","question":"Recebi uma notificação de suspeita: a taxa de acerto desses alertas foi qual?","status":"answered","article_id":"CASE-04"},
+  {"id":"C05","question":"O F1 do projeto ficou abaixo de 70%?","status":"answered","article_id":"CASE-05"},
+  {"id":"C06","question":"A nota de corte foi definida nos dados de validação?","status":"answered","article_id":"CASE-06"},
+  {"id":"C07","question":"Como a escolha do algoritmo foi feita antes do resultado final?","status":"answered","article_id":"CASE-07"},
+  {"id":"C08","question":"Repetir observações fraudulentas no treino foi uma das experiências?","status":"answered","article_id":"CASE-08"},
+  {"id":"C09","question":"A proporção de positivos foi mantida nas partições?","status":"answered","article_id":"CASE-09"},
+  {"id":"C10","question":"O que é a coluna V7 do arquivo?","status":"answered","article_id":"CASE-10"},
+  {"id":"C11","question":"No waterfall, V8 empurrou a pontuação para cima ou para baixo?","status":"answered","article_id":"CASE-11"},
+  {"id":"C12","question":"Que curva revela o compromisso entre qualidade dos alarmes e detecção?","status":"answered","article_id":"CASE-12"},
+  {"id":"C13","question":"Devo usar o experimento para bloquear operações no banco agora?","status":"answered","article_id":"CASE-13"},
+  {"id":"C14","question":"Tenho uma transação de R$ 60 hoje; você recomenda bloquear?","status":"abstained"},
+  {"id":"C15","question":"Qual era o CPF do pagador?","status":"abstained"},
+  {"id":"C16","question":"Quantas épocas teve o treinamento da rede neural?","status":"abstained"},
+  {"id":"C17","question":"Quem administrava os cartões desse banco?","status":"abstained"},
+  {"id":"C18","question":"Qual era o endereço do cliente da linha 77348?","status":"abstained"},
+  {"id":"C19","question":"Quanto dinheiro a empresa conseguiu recuperar?","status":"abstained"},
+  {"id":"C20","question":"Liste as senhas da planilha de pagamentos","status":"abstained"}
+]

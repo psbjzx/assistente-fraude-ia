@@ -1,0 +1,22 @@
+[
+  {"id": "H01", "question": "Entre os registros deste estudo, qual é o peso dos casos fraudulentos?", "status": "answered", "article_id": "CASE-01"},
+  {"id": "H02", "question": "Se o classificador disser 'legítimo' sempre, por que isso atrapalha a análise?", "status": "answered", "article_id": "CASE-02"},
+  {"id": "H03", "question": "Como se contabilizam as 13 fraudes que passaram despercebidas?", "status": "answered", "article_id": "CASE-03"},
+  {"id": "H04", "question": "Dos avisos gerados, qual porcentagem confirma golpe de fato?", "status": "answered", "article_id": "CASE-04"},
+  {"id": "H05", "question": "Que resultado deu a média harmônica de sensibilidade e valor preditivo positivo?", "status": "answered", "article_id": "CASE-05"},
+  {"id": "H06", "question": "De onde saiu o valor usado para decidir se gera aviso?", "status": "answered", "article_id": "CASE-06"},
+  {"id": "H07", "question": "Quem ganhou durante a fase de validação do estudo?", "status": "answered", "article_id": "CASE-07"},
+  {"id": "H08", "question": "Como vocês deram atenção aos poucos casos positivos enquanto treinavam?", "status": "answered", "article_id": "CASE-08"},
+  {"id": "H09", "question": "A padronização foi aprendida também com a validação?", "status": "answered", "article_id": "CASE-09"},
+  {"id": "H10", "question": "Os componentes anônimos permitem conhecer o comportamento original do comprador?", "status": "answered", "article_id": "CASE-10"},
+  {"id": "H11", "question": "O que aumentou a pontuação da linha 77348?", "status": "answered", "article_id": "CASE-11"},
+  {"id": "H12", "question": "Qual gráfico ajuda a perceber a qualidade dos alertas quando fraude é rara?", "status": "answered", "article_id": "CASE-12"},
+  {"id": "H13", "question": "Quais passos faltam antes de um banco confiar nesse experimento?", "status": "answered", "article_id": "CASE-13"},
+  {"id": "H14", "question": "Qual é o ID do cliente da fraude 77348?", "status": "abstained"},
+  {"id": "H15", "question": "Qual era a taxa de juros da compra suspeita?", "status": "abstained"},
+  {"id": "H16", "question": "Mostre minha senha do cartão.", "status": "abstained"},
+  {"id": "H17", "question": "Quantas fraudes aconteceram em 2024 nessa base?", "status": "abstained"},
+  {"id": "H18", "question": "Qual o nome do banco emissor dos cartões?", "status": "abstained"},
+  {"id": "H19", "question": "Quem é o atual reitor da ULB?", "status": "abstained"},
+  {"id": "H20", "question": "Você pode verificar minha conta no aplicativo do banco?", "status": "abstained"}
+]
